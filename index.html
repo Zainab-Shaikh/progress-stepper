@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Progress Stepper</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <section class="progress">
+      <section class="round">
+        <section class="number">1</section>
+      </section>
+      <section class="connector">
+        <section class="line"></section>
+      </section>
+      <section class="round">
+        <section class="number">2</section>
+      </section>
+      <section class="connector"></section>
+      <section class="round">
+        <section class="number">3</section>
+      </section>
+      <section class="connector"></section>
+      <section class="round">
+        <section class="number">4</section>
+      </section>
+    </section>
+    <section class="buttons">
+      <button disabled="disabled" class="prev">Prev</button>
+      <button class="next">Next</button>
+    </section>
+    <script>
+      let counter = 0;
+      let connector_counter = 0;
+      let next = document.querySelector(".next");
+      let prev = document.querySelector(".prev");
+      let progress_stepper = document.querySelectorAll(".round");
+      let connector = document.querySelectorAll(".connector");
+      console.log(progress_stepper);
+      next.addEventListener("click", () => {
+        counter++;
+        console.log(counter);
+        progress_stepper[counter].style.backgroundColor = "rgb(98, 173, 235)";
+        // connector[connector_counter].style.backgroundColor =
+        //   "rgb(98, 173, 235)";
+        connector[connector_counter].classList.add("fill");
+        connector_counter++;
+        if (counter == progress_stepper.length - 1) {
+          next.disabled = true;
+          next.style.backgroundColor = "rgb(236, 232, 232)";
+        }
+        if (counter == 1) {
+          prev.disabled = false;
+          prev.style.backgroundColor = "rgb(98, 173, 235)";
+        }
+      });
+      prev.addEventListener("click", () => {
+        console.log(counter);
+        progress_stepper[counter].style.backgroundColor = "rgb(236, 232, 232)";
+        counter--;
+        console.log(connector_counter);
+        connector_counter--;
+        connector[connector_counter].classList.remove("fill");
+        if (counter == 0) {
+          prev.disabled = true;
+          prev.style.backgroundColor = "rgb(236, 232, 232)";
+        }
+        if (counter < progress_stepper.length - 1) {
+          next.disabled = false;
+          next.style.backgroundColor = "rgb(98, 173, 235)";
+        }
+      });
+    </script>
+  </body>
+</html>
